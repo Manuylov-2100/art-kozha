@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Баннер (компонент: баннеры, слайдер) -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Мануфактура изделий из кожи · с 2014 года</div>
+    <h1>{{ banners[0].title }}</h1>
+    <p>{{ banners[0].subtitle }}</p>
+    <div class="actions">
+      <a href="{{ banners[0].link }}" class="btn">{{ banners[0].cta }}</a>
+      <a href="{{ url_for('services') }}" class="btn btn-ghost">Услуги мастерской</a>
+    </div>
+  </div>
+  <div class="hero-dots">
+    {% for b in banners %}<span class="{{ 'on' if loop.first }}"></span>{% endfor %}
+  </div>
+</section>
+
+<!-- Преимущества -->
+<section class="features">
+  <div class="container">
+    <div class="grid grid-4">
+      <div class="feature"><div class="ic">✋</div><b>Ручная работа</b><span>Сборка вручную седельным швом</span></div>
+      <div class="feature"><div class="ic">🌿</div><b>Натуральная кожа</b><span>Растительное дубление</span></div>
+      <div class="feature"><div class="ic">✂️</div><b>Пошив на заказ</b><span>По вашему эскизу за 10–14 дней</span></div>
+      <div class="feature"><div class="ic">🛡</div><b>Гарантия 10 лет</b><span>Ремонт и реставрация изделий</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Популярные изделия -->
+<section class="block">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Каталог</div>
+      <h2>Популярные изделия</h2>
+      <p>Сумки, ремни и аксессуары из кожи растительного дубления, созданные вручную в нашей мастерской.</p>
+    </div>
+    <div class="grid grid-4">
+      {% for p in products %}
+      <a class="card" href="{{ url_for('product', pid=p.id) }}">
+        <div class="thumb">АК</div>
+        <div class="body">
+          <div class="cat">{{ p.category }}</div>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description[:90] }}…</p>
+          <div class="price">{{ '{:,}'.format(p.price).replace(',', ' ') }} ₽</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a href="{{ url_for('catalog') }}" class="btn btn-outline">Весь каталог →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Лента новостей (компонент: лента новостей) -->
+<section class="block" style="background:var(--paper);border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Журнал</div>
+      <h2>Новости мануфактуры</h2>
+    </div>
+    <div style="max-width:820px;margin:0 auto">
+      {% for n in news %}
+      <div class="news-item">
+        <div class="date">{{ n.date }}</div>
+        <div>
+          <h3><a href="{{ url_for('news_item', nid=n.id) }}">{{ n.title }}</a></h3>
+          <p>{{ n.summary }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:28px">
+      <a href="{{ url_for('news') }}" class="btn btn-outline">Все новости →</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block heroslides %}
+<script>
+  window.__heroSlides = [
+    {% for b in banners %}{title:{{ b.title|tojson }},subtitle:{{ b.subtitle|tojson }},cta:{{ b.cta|tojson }},link:{{ b.link|tojson }}}{{ "," if not loop.last }}{% endfor %}
+  ];
+</script>
+{% endblock %}
