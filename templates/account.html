@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">{{ 'Сотрудник' if user.role=='admin' else 'Покупатель' }}</div>
+  <h1>Личный кабинет</h1>
+</div></section>
+<section class="block" style="padding-top:24px"><div class="container">
+  <div class="grid grid-2" style="align-items:start">
+    <div class="formcard">
+      <h2 class="serif" style="margin-bottom:14px">Профиль</h2>
+      <table class="tbl">
+        <tr><th>Логин</th><td>{{ user.username }}</td></tr>
+        <tr><th>ФИО</th><td>{{ user.full_name or '—' }}</td></tr>
+        <tr><th>E-mail</th><td>{{ user.email or '—' }}</td></tr>
+        <tr><th>Роль</th><td><span class="badge {{ user.role }}">{{ 'Сотрудник' if user.role=='admin' else 'Покупатель' }}</span></td></tr>
+        <tr><th>Регистрация</th><td>{{ user.created_at }}</td></tr>
+      </table>
+      <div style="margin-top:18px">
+        <a href="{{ url_for('messages') }}" class="btn">Мои сообщения</a>
+        {% if user.role=='admin' %}<a href="{{ url_for('admin') }}" class="btn btn-outline">Панель сотрудника</a>{% endif %}
+      </div>
+    </div>
+    <div class="formcard">
+      <h2 class="serif" style="margin-bottom:14px">Последние сообщения</h2>
+      {% for m in msgs %}
+        <div class="msg {{ 'them' if m.is_from_staff else 'me' }}">
+          <div class="who">{{ 'Менеджер' if m.is_from_staff else 'Вы' }} · {{ m.created_at }}</div>
+          {{ m.body }}
+        </div>
+      {% else %}
+        <p style="color:var(--muted)">Сообщений пока нет.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div></section>
+{% endblock %}

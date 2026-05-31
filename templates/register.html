@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Регистрация — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="block"><div class="container" style="max-width:460px">
+  <h1 class="serif" style="font-size:34px;text-align:center;margin-bottom:24px">Регистрация покупателя</h1>
+  <div class="formcard">
+    <form method="post">
+      <div class="field"><label>Логин *</label><input name="username" required></div>
+      <div class="field"><label>Пароль *</label><input type="password" name="password" required></div>
+      <div class="field"><label>ФИО</label><input name="full_name"></div>
+      <div class="field"><label>E-mail</label><input type="email" name="email"></div>
+      <button class="btn" type="submit" style="width:100%">Создать учётную запись</button>
+    </form>
+    <p style="text-align:center;margin-top:16px;color:var(--muted)">
+      Уже есть аккаунт? <a href="{{ url_for('login') }}">Войти</a></p>
+  </div>
+</div></section>
+{% endblock %}

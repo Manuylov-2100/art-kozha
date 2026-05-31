@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Поиск — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Поиск по сайту</div><h1>Результаты поиска</h1>
+</div></section>
+<section class="block" style="padding-top:24px"><div class="container"><div class="prose">
+  <form action="{{ url_for('search') }}" method="get" style="display:flex;gap:10px;margin-bottom:26px">
+    <input class="field" name="q" value="{{ q }}" placeholder="Что ищем?" style="flex:1;padding:12px 14px;border:1px solid var(--line);border-radius:4px">
+    <button class="btn" type="submit">Найти</button>
+  </form>
+  {% if q %}
+    <p style="color:var(--muted)">По запросу «<b>{{ q }}</b>» найдено: {{ results|length }}</p>
+    {% for r in results %}
+      {% if r.kind == 'catalog' %}{% set link = url_for('product', pid=r.id) %}{% set label = 'Каталог' %}
+      {% elif r.kind == 'news' %}{% set link = url_for('news_item', nid=r.id) %}{% set label = 'Новости' %}
+      {% elif r.kind == 'blog' %}{% set link = url_for('article', aid=r.id) %}{% set label = 'Статьи' %}
+      {% else %}{% set link = url_for('services') %}{% set label = 'Услуги' %}{% endif %}
+      <div class="news-item">
+        <div class="date">{{ label }}</div>
+        <div>
+          <h3><a href="{{ link }}">{{ r.title }}</a></h3>
+          <p>{{ r.text[:140] }}…</p>
+        </div>
+      </div>
+    {% else %}
+      <p>Ничего не найдено. Попробуйте изменить запрос.</p>
+    {% endfor %}
+  {% else %}
+    <p style="color:var(--muted)">Введите поисковый запрос — например, «сумка», «ремонт» или «дубление».</p>
+  {% endif %}
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} — АРТ-Кожа{% endblock %}
+{% block content %}
+<div class="container"><div class="breadcrumbs">
+  <a href="{{ url_for('index') }}">Главная</a> / <a href="{{ url_for('catalog') }}">Каталог</a> / {{ item.title }}
+</div></div>
+<section class="block" style="padding-top:10px"><div class="container">
+  <div class="grid grid-2" style="align-items:start">
+    <div class="thumb" style="aspect-ratio:1/1;background:linear-gradient(135deg,#8a5a35,#5e3a22);
+      display:flex;align-items:center;justify-content:center;color:#f3e6d0;
+      font-family:var(--serif);font-size:90px;border-radius:4px">АК</div>
+    <div>
+      <div class="cat" style="color:var(--brass);letter-spacing:2px;text-transform:uppercase;font-size:12px">{{ item.category }}</div>
+      <h1 class="serif" style="font-size:38px;color:var(--espresso);margin:8px 0 14px">{{ item.title }}</h1>
+      <div class="price" style="font-size:30px;color:var(--cognac);font-weight:700;margin-bottom:18px">
+        {{ '{:,}'.format(item.price).replace(',', ' ') }} ₽</div>
+      <p style="margin-bottom:18px">{{ item.description }}</p>
+      <p style="color:var(--muted);margin-bottom:24px"><b>Материал:</b> {{ item.material }}</p>
+      <a href="{{ url_for('contacts') }}" class="btn">Заказать изделие</a>
+      {% if user %}<a href="{{ url_for('messages') }}" class="btn btn-outline">Спросить менеджера</a>{% endif %}
+    </div>
+  </div>
+</div></section>
+{% endblock %}

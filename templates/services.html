@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Услуги — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Мастерская</div><h1>Услуги</h1>
+</div></section>
+<div class="container"><div class="breadcrumbs"><a href="{{ url_for('index') }}">Главная</a> / Услуги</div></div>
+<section class="block" style="padding-top:20px"><div class="container">
+  <div class="grid grid-2">
+    {% for s in items %}
+    <div class="card"><div class="body">
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.description }}</p>
+      <div class="price">{{ s.price }}</div>
+    </div></div>
+    {% endfor %}
+  </div>
+  <div style="text-align:center;margin-top:34px">
+    <a href="{{ url_for('contacts') }}" class="btn">Оставить заявку</a>
+  </div>
+</div></section>
+{% endblock %}

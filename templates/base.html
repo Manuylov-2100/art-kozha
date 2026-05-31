@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}АРТ-Кожа — мануфактура изделий из кожи{% endblock %}</title>
+  <meta name="description" content="Мануфактура «АРТ-Кожа»: сумки, ремни и аксессуары из кожи ручной работы. Индивидуальный пошив, ремонт, корпоративные подарки.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/accessible.css') }}">
+</head>
+<body>
+
+<!-- Панель версии для слабовидящих (ГОСТ Р 52872-2012) -->
+<div class="vi-panel" id="vi-panel">
+  <div class="container">
+    <div class="grp"><span class="lbl">Цвет:</span>
+      <button class="swatch-bw" data-scheme="bw">Ч на Б</button>
+      <button class="swatch-wb" data-scheme="wb">Б на Ч</button>
+      <button class="swatch-bg" data-scheme="bg">Бежевый</button>
+      <button class="swatch-bb" data-scheme="bb">Голубой</button>
+    </div>
+    <div class="grp"><span class="lbl">Размер:</span>
+      <button data-fs="fs-1">А</button>
+      <button data-fs="fs-2">А+</button>
+      <button data-fs="fs-3">А++</button>
+    </div>
+    <div class="grp">
+      <button id="vi-noimg">Картинки вкл/выкл</button>
+    </div>
+    <button class="close" id="vi-off" title="Обычная версия">✕ Обычная версия</button>
+  </div>
+</div>
+
+<!-- Верхняя строка -->
+<div class="topbar">
+  <div class="container">
+    <span>г. Москва, ул. Кожевническая, 12 · ☎ +7 (495) 120-45-67</span>
+    <div class="tb-right">
+      <a href="#" class="vi-toggle" id="vi-on"><span class="eye">👁</span> Версия для слабовидящих</a>
+      {% if user %}
+        <a href="{{ url_for('account') }}">Кабинет</a>
+        {% if user.role == 'admin' %}<a href="{{ url_for('admin') }}">Панель сотрудника</a>{% endif %}
+        <a href="{{ url_for('logout') }}">Выход</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Вход</a>
+        <a href="{{ url_for('register') }}">Регистрация</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Шапка с логотипом и поиском -->
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="{{ url_for('index') }}">
+      <span class="mark">АК</span>
+      <span><b>АРТ-Кожа</b><span>мануфактура · ручная работа</span></span>
+    </a>
+    <form class="header-search" action="{{ url_for('search') }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Поиск по сайту…" aria-label="Поиск по сайту">
+      <button type="submit">Найти</button>
+    </form>
+  </div>
+</header>
+
+<!-- Главное меню -->
+<nav class="mainnav" aria-label="Главное меню">
+  <div class="container">
+    {% for endpoint, label in menu %}
+      <a href="{{ url_for(endpoint) }}"
+         class="{{ 'active' if request.endpoint == endpoint else '' }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container" style="padding-top:18px">
+        {% for cat, msg in messages %}
+          <div class="flash {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Подвал -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>АРТ-Кожа</h4>
+        <p>Мануфактура изделий из кожи ручной работы. Сумки, ремни, аксессуары,
+           индивидуальный пошив и реставрация с 2014 года.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="{{ url_for('catalog') }}">Каталог</a></li>
+          <li><a href="{{ url_for('services') }}">Услуги</a></li>
+          <li><a href="{{ url_for('news') }}">Новости</a></li>
+          <li><a href="{{ url_for('blog') }}">Статьи</a></li>
+          <li><a href="{{ url_for('sitemap') }}">Карта сайта</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li>г. Москва, ул. Кожевническая, 12</li>
+          <li>☎ +7 (495) 120-45-67</li>
+          <li>✉ info@art-kozha.ru</li>
+          <li>Пн–Пт 10:00–19:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2014–{{ now.year }} Мануфактура «АРТ-Кожа». Все права защищены.</span>
+      <span><a href="{{ url_for('sitemap') }}">Карта сайта</a> · <a href="{{ url_for('contacts') }}">Обратная связь</a></span>
+    </div>
+  </div>
+</footer>
+
+{% block heroslides %}{% endblock %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

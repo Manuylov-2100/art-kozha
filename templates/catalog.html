@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Каталог — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Продукция</div><h1>Каталог изделий</h1>
+</div></section>
+<div class="container"><div class="breadcrumbs"><a href="{{ url_for('index') }}">Главная</a> / Каталог</div></div>
+<section class="block" style="padding-top:10px"><div class="container">
+  <div class="filters">
+    <a href="{{ url_for('catalog') }}" class="{{ 'active' if not active }}">Все</a>
+    {% for c in cats %}
+      <a href="{{ url_for('catalog', category=c.category) }}"
+         class="{{ 'active' if active == c.category }}">{{ c.category }}</a>
+    {% endfor %}
+  </div>
+  <div class="grid grid-3">
+    {% for p in items %}
+    <a class="card" href="{{ url_for('product', pid=p.id) }}">
+      <div class="thumb">АК</div>
+      <div class="body">
+        <div class="cat">{{ p.category }}</div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.description[:100] }}…</p>
+        <div class="price">{{ '{:,}'.format(p.price).replace(',', ' ') }} ₽</div>
+        <div class="meta">{{ p.material }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

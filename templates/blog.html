@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Статьи — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Журнал</div><h1>Статьи о коже и ремесле</h1>
+</div></section>
+<div class="container"><div class="breadcrumbs"><a href="{{ url_for('index') }}">Главная</a> / Статьи</div></div>
+<section class="block" style="padding-top:20px"><div class="container">
+  <div class="grid grid-3">
+    {% for a in items %}
+    <a class="card" href="{{ url_for('article', aid=a.id) }}">
+      <div class="thumb" style="font-size:30px">{{ a.category }}</div>
+      <div class="body">
+        <div class="cat">{{ a.date }}</div>
+        <h3>{{ a.title }}</h3>
+        <p>{{ a.summary }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Контакты — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Связаться с нами</div><h1>Контакты</h1>
+</div></section>
+<div class="container"><div class="breadcrumbs"><a href="{{ url_for('index') }}">Главная</a> / Контакты</div></div>
+<section class="block" style="padding-top:20px"><div class="container">
+  <div class="grid grid-2" style="align-items:start">
+    <div class="prose">
+      <h2>Мастерская и шоурум</h2>
+      <p>г. Москва, ул. Кожевническая, 12, 2-й этаж<br>
+         Пн–Пт 10:00–19:00, Сб 11:00–17:00</p>
+      <p><b>Телефон:</b> +7 (495) 120-45-67<br>
+         <b>E-mail:</b> info@art-kozha.ru<br>
+         <b>Отдел заказов:</b> order@art-kozha.ru</p>
+      <div class="callout">Для индивидуального пошива опишите задумку в форме —
+         менеджер подберёт кожу, фурнитуру и рассчитает стоимость.</div>
+    </div>
+    <div class="formcard">
+      <h2 class="serif" style="margin-bottom:16px">Форма обратной связи</h2>
+      <form method="post">
+        <div class="field"><label>Ваше имя</label><input name="name" required></div>
+        <div class="field"><label>E-mail</label><input type="email" name="email" required></div>
+        <div class="field"><label>Телефон</label><input name="phone"></div>
+        <div class="field"><label>Сообщение</label><textarea name="message" required></textarea></div>
+        <button class="btn" type="submit">Отправить</button>
+      </form>
+    </div>
+  </div>
+</div></section>
+{% endblock %}

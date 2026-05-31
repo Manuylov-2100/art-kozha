@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Вход — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="block"><div class="container" style="max-width:460px">
+  <h1 class="serif" style="font-size:34px;text-align:center;margin-bottom:24px">Вход в личный кабинет</h1>
+  <div class="formcard">
+    <form method="post">
+      <div class="field"><label>Логин</label><input name="username" required autofocus></div>
+      <div class="field"><label>Пароль</label><input type="password" name="password" required></div>
+      <button class="btn" type="submit" style="width:100%">Войти</button>
+    </form>
+    <p style="text-align:center;margin-top:16px;color:var(--muted)">
+      Нет аккаунта? <a href="{{ url_for('register') }}">Зарегистрироваться</a></p>
+    <div class="callout" style="margin-top:18px;font-size:14px">
+      <b>Демо-доступы:</b><br>
+      Сотрудник — <code>manager</code> / <code>Manager2026!</code><br>
+      Покупатель — <code>client</code> / <code>Client2026!</code>
+    </div>
+  </div>
+</div></section>
+{% endblock %}

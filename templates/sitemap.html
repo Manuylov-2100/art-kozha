@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Карта сайта — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Навигация</div><h1>Карта сайта</h1>
+</div></section>
+<div class="container"><div class="breadcrumbs"><a href="{{ url_for('index') }}">Главная</a> / Карта сайта</div></div>
+<section class="block" style="padding-top:24px"><div class="container">
+  <div class="sitemap-cols">
+    <div>
+      <h3>Основные разделы</h3>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Главная</a></li>
+        <li><a href="{{ url_for('about') }}">О производстве</a></li>
+        <li><a href="{{ url_for('catalog') }}">Каталог</a></li>
+        <li><a href="{{ url_for('services') }}">Услуги</a></li>
+        <li><a href="{{ url_for('news') }}">Новости</a></li>
+        <li><a href="{{ url_for('blog') }}">Статьи</a></li>
+        <li><a href="{{ url_for('contacts') }}">Контакты</a></li>
+        <li><a href="{{ url_for('search') }}">Поиск по сайту</a></li>
+      </ul>
+      <h3 style="margin-top:24px">Личный кабинет</h3>
+      <ul>
+        <li><a href="{{ url_for('login') }}">Вход</a></li>
+        <li><a href="{{ url_for('register') }}">Регистрация</a></li>
+        <li><a href="{{ url_for('account') }}">Кабинет</a></li>
+        <li><a href="{{ url_for('messages') }}">Сообщения</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Каталог изделий</h3>
+      <ul>{% for p in products %}<li><a href="{{ url_for('product', pid=p.id) }}">{{ p.title }}</a></li>{% endfor %}</ul>
+      <h3 style="margin-top:24px">Новости</h3>
+      <ul>{% for n in news %}<li><a href="{{ url_for('news_item', nid=n.id) }}">{{ n.title }}</a></li>{% endfor %}</ul>
+    </div>
+    <div>
+      <h3>Статьи</h3>
+      <ul>{% for a in articles %}<li><a href="{{ url_for('article', aid=a.id) }}">{{ a.title }}</a></li>{% endfor %}</ul>
+    </div>
+  </div>
+</div></section>
+{% endblock %}

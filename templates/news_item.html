@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} — АРТ-Кожа{% endblock %}
+{% block content %}
+<div class="container"><div class="breadcrumbs">
+  <a href="{{ url_for('index') }}">Главная</a> / <a href="{{ url_for('news') }}">Новости</a> / {{ item.title }}
+</div></div>
+<section class="block" style="padding-top:10px"><div class="container"><div class="prose">
+  <div class="cat" style="color:var(--brass);letter-spacing:2px;text-transform:uppercase;font-size:12px">{{ item.date }}</div>
+  <h1 class="serif" style="font-size:40px;color:var(--espresso);margin:8px 0 20px">{{ item.title }}</h1>
+  <p>{{ item.body }}</p>
+  <p style="margin-top:24px"><a href="{{ url_for('news') }}" class="btn btn-outline">← Ко всем новостям</a></p>
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Сообщения — АРТ-Кожа{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container">
+  <div class="eyebrow">Поддержка</div><h1>Сообщения менеджеру</h1>
+</div></section>
+<section class="block" style="padding-top:24px"><div class="container" style="max-width:760px">
+  <div class="chat">
+    {% for m in thread %}
+      <div class="msg {{ 'them' if m.is_from_staff else 'me' }}">
+        <div class="who">{{ 'Менеджер' if m.is_from_staff else (user.full_name or 'Вы') }} · {{ m.created_at }}</div>
+        {% if m.subject %}<b>{{ m.subject }}</b><br>{% endif %}{{ m.body }}
+      </div>
+    {% else %}
+      <p style="color:var(--muted)">Начните диалог — задайте вопрос менеджеру.</p>
+    {% endfor %}
+  </div>
+  <div class="formcard">
+    <form method="post">
+      <div class="field"><label>Тема</label><input name="subject" placeholder="Например: индивидуальный заказ"></div>
+      <div class="field"><label>Сообщение</label><textarea name="body" required></textarea></div>
+      <button class="btn" type="submit">Отправить менеджеру</button>
+    </form>
+  </div>
+</div></section>
+{% endblock %}
