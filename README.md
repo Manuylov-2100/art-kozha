@@ -25,7 +25,7 @@ python app.py            # сайт на http://127.0.0.1:5000
 | Роль                | Логин  | Пароль     |
 |---------------------|--------|------------|
 | Сотрудник (admin)   | manager|Manager2026!|
-| Покупатель (client) | client`|Client2026! |
+| Покупатель (client) | client |Client2026! |
 
 ## Развертывание на хостинге (пример для PythonAnywhere)
 1. Загрузить проект, создать virtualenv, `pip install -r requirements.txt`.
