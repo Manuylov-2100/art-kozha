@@ -1,0 +1,93 @@
+/* Панель управления версией для слабовидящих */
+.vi-panel{background:#1d1d1d;color:#fff;display:none}
+.vi-panel.show{display:block}
+.vi-panel .container{display:flex;flex-wrap:wrap;gap:26px;align-items:center;padding:12px 24px}
+.vi-panel .grp{display:flex;align-items:center;gap:8px}
+.vi-panel .grp .lbl{font-size:13px;opacity:.85}
+.vi-panel button{border:1px solid #888;background:#2b2b2b;color:#fff;cursor:pointer;
+  padding:6px 12px;font-family:inherit;font-size:14px;border-radius:3px}
+.vi-panel button.active{background:#fff;color:#000;border-color:#fff;font-weight:700}
+.vi-panel .swatch-bw{background:#fff;color:#000}
+.vi-panel .swatch-wb{background:#000;color:#fff}
+.vi-panel .swatch-bg{background:#f7f3d6;color:#000}
+.vi-panel .swatch-bb{background:#9dd1ff;color:#000}
+.vi-panel .close{margin-left:auto;background:transparent;border:none;font-size:20px}
+
+/* Базовый режим «для слабовидящих»: упрощение оформления */
+body.vi{line-height:1.9 !important}
+body.vi .hero::after,body.vi .hero{background:#fff !important}
+body.vi .card .thumb::after{display:none}
+body.vi *{transition:none !important;animation:none !important;box-shadow:none !important;
+  text-shadow:none !important;border-radius:0 !important}
+body.vi .card:hover,body.vi .btn:hover{transform:none !important}
+
+/* ---- Цветовые схемы ---- */
+/* Белый на чёрном */
+body.vi.scheme-wb,body.vi.scheme-wb .hero,body.vi.scheme-wb .page-hero,
+body.vi.scheme-wb .features,body.vi.scheme-wb .card,body.vi.scheme-wb .formcard,
+body.vi.scheme-wb .site-footer,body.vi.scheme-wb .topbar,body.vi.scheme-wb .mainnav,
+body.vi.scheme-wb .site-header,body.vi.scheme-wb table.tbl,body.vi.scheme-wb table.tbl th,
+body.vi.scheme-wb .callout,body.vi.scheme-wb .news-item,body.vi.scheme-wb .filters a,
+body.vi.scheme-wb .field input,body.vi.scheme-wb .field textarea,body.vi.scheme-wb .msg{
+  background:#000 !important;color:#fff !important}
+body.vi.scheme-wb,body.vi.scheme-wb .card,body.vi.scheme-wb .field input,
+body.vi.scheme-wb table.tbl,body.vi.scheme-wb table.tbl td,body.vi.scheme-wb table.tbl th,
+body.vi.scheme-wb .news-item,body.vi.scheme-wb .filters a,body.vi.scheme-wb .formcard,
+body.vi.scheme-wb .mainnav a,body.vi.scheme-wb .site-header{border-color:#fff !important}
+body.vi.scheme-wb a,body.vi.scheme-wb h1,body.vi.scheme-wb h2,body.vi.scheme-wb h3,
+body.vi.scheme-wb h4,body.vi.scheme-wb .price,body.vi.scheme-wb .cat,body.vi.scheme-wb .eyebrow,
+body.vi.scheme-wb .date,body.vi.scheme-wb .btn{color:#ffe600 !important}
+body.vi.scheme-wb .btn{background:#000 !important;border:2px solid #ffe600 !important}
+
+/* Чёрный на белом */
+body.vi.scheme-bw,body.vi.scheme-bw .hero,body.vi.scheme-bw .page-hero,
+body.vi.scheme-bw .features,body.vi.scheme-bw .card,body.vi.scheme-bw .formcard,
+body.vi.scheme-bw .site-footer,body.vi.scheme-bw .topbar,body.vi.scheme-bw .mainnav,
+body.vi.scheme-bw .site-header,body.vi.scheme-bw table.tbl th,body.vi.scheme-bw .callout,
+body.vi.scheme-bw .msg{background:#fff !important;color:#000 !important}
+body.vi.scheme-bw a,body.vi.scheme-bw h1,body.vi.scheme-bw h2,body.vi.scheme-bw h3,
+body.vi.scheme-bw h4,body.vi.scheme-bw .price,body.vi.scheme-bw .cat,body.vi.scheme-bw .eyebrow,
+body.vi.scheme-bw .date{color:#000 !important;font-weight:700}
+body.vi.scheme-bw .btn{background:#000 !important;color:#fff !important;border:2px solid #000}
+body.vi.scheme-bw *{border-color:#000 !important}
+
+/* Бежевая (тёмно-коричневый на светло-жёлтом) */
+body.vi.scheme-bg,body.vi.scheme-bg .hero,body.vi.scheme-bg .page-hero,
+body.vi.scheme-bg .features,body.vi.scheme-bg .card,body.vi.scheme-bg .formcard,
+body.vi.scheme-bg .site-footer,body.vi.scheme-bg .topbar,body.vi.scheme-bg .mainnav,
+body.vi.scheme-bg .site-header,body.vi.scheme-bg table.tbl th,body.vi.scheme-bg .callout,
+body.vi.scheme-bg .msg{background:#f7f3d6 !important;color:#4b3a10 !important}
+body.vi.scheme-bg a,body.vi.scheme-bg h1,body.vi.scheme-bg h2,body.vi.scheme-bg h3,
+body.vi.scheme-bg h4,body.vi.scheme-bg .price,body.vi.scheme-bg .cat,body.vi.scheme-bg .eyebrow,
+body.vi.scheme-bg .date{color:#4b3a10 !important;font-weight:700}
+body.vi.scheme-bg .btn{background:#4b3a10 !important;color:#f7f3d6 !important}
+body.vi.scheme-bg *{border-color:#4b3a10 !important}
+
+/* Голубой фон (синий на светло-голубом) */
+body.vi.scheme-bb,body.vi.scheme-bb .hero,body.vi.scheme-bb .page-hero,
+body.vi.scheme-bb .features,body.vi.scheme-bb .card,body.vi.scheme-bb .formcard,
+body.vi.scheme-bb .site-footer,body.vi.scheme-bb .topbar,body.vi.scheme-bb .mainnav,
+body.vi.scheme-bb .site-header,body.vi.scheme-bb table.tbl th,body.vi.scheme-bb .callout,
+body.vi.scheme-bb .msg{background:#9dd1ff !important;color:#063b66 !important}
+body.vi.scheme-bb a,body.vi.scheme-bb h1,body.vi.scheme-bb h2,body.vi.scheme-bb h3,
+body.vi.scheme-bb h4,body.vi.scheme-bb .price,body.vi.scheme-bb .cat,body.vi.scheme-bb .eyebrow,
+body.vi.scheme-bb .date{color:#063b66 !important;font-weight:700}
+body.vi.scheme-bb .btn{background:#063b66 !important;color:#9dd1ff !important}
+body.vi.scheme-bb *{border-color:#063b66 !important}
+
+/* ---- Размер шрифта ---- */
+body.vi.fs-1{font-size:20px !important}
+body.vi.fs-2{font-size:24px !important}
+body.vi.fs-3{font-size:30px !important}
+body.vi.fs-1 .card h3,body.vi.fs-1 .hero h1,body.vi.fs-1 .page-hero h1,body.vi.fs-1 .section-head h2{font-size:1.6em !important}
+body.vi.fs-2 .card h3,body.vi.fs-2 .hero h1,body.vi.fs-2 .page-hero h1,body.vi.fs-2 .section-head h2{font-size:1.5em !important}
+body.vi.fs-3 .card h3,body.vi.fs-3 .hero h1,body.vi.fs-3 .page-hero h1,body.vi.fs-3 .section-head h2{font-size:1.4em !important}
+body.vi .mainnav a{text-transform:none !important;letter-spacing:0 !important}
+
+/* ---- Отключение изображений ---- */
+body.vi.noimg img{display:none !important}
+body.vi.noimg .card .thumb,body.vi.noimg .hero{background:none !important}
+
+/* Кнопка вызова версии в верхней панели */
+.vi-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.vi-toggle .eye{font-size:16px}
